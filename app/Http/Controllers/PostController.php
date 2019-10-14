@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Post::query()->paginate();
+        return Post::query()->with('user')->paginate();
     }
 
     /**
@@ -40,7 +40,10 @@ class PostController extends Controller
         $post->text = $request->get('text');
         $post->file_path = $request->file('image')->store('posts', 'public');
 
-        Auth::user()->posts()->create($post);
+        $user = Auth::user();
+        $user->posts()->save($post);
+
+        $post->setRelation('user', $user);
 
         return $post;
     }
@@ -53,6 +56,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $post->load('user');
+
         return $post;
     }
 

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
@@ -20,6 +21,16 @@ class Post extends Model
      * @var array
      */
     protected $appends = ['image_url'];
+
+    /**
+     * Relation to the user who added this post.
+     *
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * Get the URL for this post's image.
