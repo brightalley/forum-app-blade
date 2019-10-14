@@ -6,11 +6,13 @@ Simple API project as a base for a forum app.
 
 - Laravel
 - React
-- MySQL (or similar)
+- MySQL
 
 ## Requirements
 
 - PHP 7.2+
+- Composer
+- MySQL
 - Node 8+
 
 ## Installation
@@ -22,6 +24,8 @@ not used.
 
 Run the following commands to get up and running:
 
+- `composer install`
+- `php artisan key:generate`
 - `php artisan migrate`
 - `php artisan db:seed`
 - `php artisan storage:link`
