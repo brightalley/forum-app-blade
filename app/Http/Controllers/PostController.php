@@ -70,7 +70,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         if ($post->user_id != Auth::id()) {
-            return ['ok' => false];
+            abort(403);
         }
 
         $post->delete();

@@ -37,7 +37,7 @@ class CommentController extends Controller
         $comment->setRelation('post', $post);
         $comment->setRelation('user', Auth::user());
 
-        return $comment;
+        return redirect()->action([PostController::class, 'show'], [$comment->post_id]);
     }
 
     /**
@@ -49,11 +49,11 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         if ($comment->user_id != Auth::id()) {
-            return ['ok' => false];
+            abort(403);
         }
 
         $comment->delete();
 
-        return ['ok' => true];
+        return redirect()->action([PostController::class, 'show'], [$comment->post_id]);
     }
 }
