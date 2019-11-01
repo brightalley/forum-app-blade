@@ -13,6 +13,6 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::redirect('/', '/posts');
 Route::resource('comments', 'CommentController', ['only' => ['store', 'destroy']]);
 Route::resource('posts', 'PostController', ['only' => ['index', 'store', 'show', 'destroy']]);

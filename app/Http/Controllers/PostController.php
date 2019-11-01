@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Post::query()->with('user')->paginate();
+        return view('home')->with('posts', Post::query()->with('user')->paginate());
     }
 
     /**
@@ -45,7 +45,7 @@ class PostController extends Controller
 
         $post->setRelation('user', $user);
 
-        return $post;
+        return redirect()->action([__CLASS__, 'show'], [$post]);
     }
 
     /**
@@ -58,7 +58,7 @@ class PostController extends Controller
     {
         $post->load('user');
 
-        return $post;
+        return view('post')->with('posts', $post);
     }
 
     /**
@@ -75,6 +75,6 @@ class PostController extends Controller
 
         $post->delete();
 
-        return ['ok' => true];
+        return redirect()->action([__CLASS__, 'index']);
     }
 }

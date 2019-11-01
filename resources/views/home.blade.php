@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="example">
-</div>
+Post list goes here
 @endsection
